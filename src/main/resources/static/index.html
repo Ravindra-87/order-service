@@ -35,18 +35,29 @@
             max-width: 1100px;
         }
 
-        .order-card {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06),
-            0 8px 20px rgba(0, 0, 0, 0.1);
-            padding: 0;
-            transition: box-shadow 0.3s ease;
-            cursor: default;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+        .order-card:nth-child(even) {
+            animation-delay: 0.1s;
+        }
+        .order-card:nth-child(odd) {
+            animation-delay: 0.2s;
+        }
+
+        .order-card {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+
 
         .card-hover-zone {
             transition: transform 0.35s ease-in-out, background-color 0.35s ease-in-out;
@@ -182,7 +193,7 @@
 
 <script>
     function fetchorders() {
-        fetch('http://34.72.191.12:30082/orders/fetchAll')
+        fetch('http://34.55.242.31/orders/fetchAll')
             .then(response => {
                 if (!response.ok) throw new Error('Failed to fetch orders');
                 return response.json();

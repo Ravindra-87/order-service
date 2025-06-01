@@ -8,15 +8,21 @@ pipeline {
     }
 
     environment {
+        //credentials for access between jenkins and gcp
         GOOGLE_CREDENTIALS = credentials('gcp-acess-for-jenkins')   // Credential ID for the Google Service Account
         GITHUB_CREDENTIALS = credentials('github-access-id') // Credential ID for GitHub token
+        //GCP details
         GOOGLE_PROJECT_ID = 'multi-micro-project'
+        GSA_EMAIL = 'jenkins-gsa@jenkins-gke-project-457719.iam.gserviceaccount.com'
+
+        //cluster details
         GOOGLE_CLUSTER_NAME = 'dev-cluster'
         GOOGLE_CLUSTER_ZONE = 'us-central1-a'
-        IMAGE_URL = 'asia-south1-docker.pkg.dev/multi-micro-project/mutli-micro-repo/order-service-project'
-        GSA_EMAIL = 'jenkins-gsa@jenkins-gke-project-457719.iam.gserviceaccount.com'
         KSA_NAME = 'ksa'
-        KSA_NAMESPACE = 'pro-dev'
+        KSA_NAMESPACE = 'dn'
+
+       //docker image details
+        IMAGE_URL = 'asia-south1-docker.pkg.dev/multi-micro-project/mutli-micro-repo/order-service-project'
         DOCKER_BUILDKIT = '1'
         DOCKER_CLI_EXPERIMENTAL = 'enabled'
         BUILD_NUMBER_KEY = "${BUILD_NUMBER}"
@@ -77,5 +83,3 @@ pipeline {
         }
     }
 }
-
-Dockerfile

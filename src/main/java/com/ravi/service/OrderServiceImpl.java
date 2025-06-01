@@ -12,6 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -42,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
                     Order order = new Order();
                     order.setProductId(dto.getProductId());
                     order.setProductName(dto.getProductName());
-                    order.setProductprice(dto.getPrice());
+                    order.setProductPrice(dto.getPrice());
                     //Date
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     String formattedDate = formatter.format(new Date());
@@ -51,5 +52,11 @@ public class OrderServiceImpl implements OrderService {
                     return orderRepository.save(order).getOrderId();
                 })
                 .orElse(0L);
+    }
+
+
+    @Override
+    public List<Order> getOrders() {
+        return orderRepository.findAll();
     }
 }

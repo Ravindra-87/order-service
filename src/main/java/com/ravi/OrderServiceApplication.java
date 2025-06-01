@@ -13,7 +13,7 @@ public class OrderServiceApplication {
     @Bean
     public WebClient webClient() {
         return WebClient.builder()
-                .baseUrl("http://34.72.191.12:30081/") // required for uriBuilder to work
+                .baseUrl("http://34.30.212.22/") // required for uriBuilder to work
                 .build();
     }
 

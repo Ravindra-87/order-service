@@ -21,7 +21,7 @@ spec:
           image: asia-south1-docker.pkg.dev/multi-micro-project/mutli-micro-repo/order-service-project:tag_version
           imagePullPolicy: Always
           ports:
-            - containerPort: 8081
+            - containerPort: 8082
           env:
             - name: DB_HOST
               value: "127.0.0.1"  # Cloud SQL Proxy will listen on localhost

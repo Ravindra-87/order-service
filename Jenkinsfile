@@ -22,7 +22,7 @@ pipeline {
         KSA_NAMESPACE = 'dn'
 
        //docker image details
-        IMAGE_URL = 'asia-south1-docker.pkg.dev/multi-micro-project/mutli-micro-repo/order-service-project'
+        IMAGE_URL = 'asia-south1-docker.pkg.dev/multi-micro-project/order-service-repo'
         DOCKER_BUILDKIT = '1'
         DOCKER_CLI_EXPERIMENTAL = 'enabled'
         BUILD_NUMBER_KEY = "${BUILD_NUMBER}"

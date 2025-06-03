@@ -4,7 +4,7 @@ metadata:
   name: order-project-service
   namespace: dn
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: order-service-project
   ports:

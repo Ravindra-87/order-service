@@ -38,5 +38,4 @@ public class OrderController {
                 .map(orders -> new ResponseEntity<>(orders, HttpStatus.CREATED))
                 .orElseGet(() -> new ResponseEntity<>(Collections.emptyList(), HttpStatus.NO_CONTENT));
     }
-
 }

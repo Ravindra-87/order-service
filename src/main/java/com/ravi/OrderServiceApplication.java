@@ -13,7 +13,7 @@ public class OrderServiceApplication {
     @Bean
     public WebClient webClient() {
         return WebClient.builder()
-                .baseUrl("http://localhost:8081/") // required for uriBuilder to work
+                .baseUrl("http://purchasefuture.zapto.org/") // required for uriBuilder to work
                 .build();
     }
 

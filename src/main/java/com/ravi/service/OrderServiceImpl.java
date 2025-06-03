@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
         log.info("before palcing order");
 
         ProductDto productDto=webClient.get()
-                            .uri(uriBuilder -> uriBuilder.path("/app/fetchProduct/"+orderRequest.getProductId()).build())
+                            .uri(uriBuilder -> uriBuilder.path("/products/fetchProduct/"+orderRequest.getProductId()).build())
                             .retrieve()
                             .bodyToMono(ProductDto.class)
                             .block();

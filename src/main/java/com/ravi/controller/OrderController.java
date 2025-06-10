@@ -2,6 +2,7 @@ package com.ravi.controller;
 
 
 import com.ravi.entity.Order;
+import com.ravi.kafka.OrderEventProducer;
 import com.ravi.model.OrderRequest;
 import com.ravi.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,14 +20,26 @@ import java.util.Optional;
 @RequestMapping("/orders")
 public class OrderController {
 
-
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    OrderEventProducer orderEventProducer ;
+
     @PostMapping("/placeOrder")
-    public ResponseEntity<Long> placeOrder(@RequestBody OrderRequest orderRequest) {
+    public ResponseEntity<?> placeOrder(@RequestBody OrderRequest orderRequest) {
+
+
         Long orderId = orderService.placeOrder(orderRequest);
-        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
+        log.info("placeOrder called");
+
+        if (orderId != 0) {
+            // Send Kafka event
+            orderEventProducer.sendOrderCreatedEvent("Order created with below product \n" + orderRequest);
+            return new ResponseEntity<>(orderId, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Product not available", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/fetchAll")

@@ -20,7 +20,7 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
 
 
-    @Autowired
+    @Autowired(required = false)
     OrderRepository orderRepository;
 
     @Autowired

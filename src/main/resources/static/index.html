@@ -190,7 +190,7 @@
 <div id="result">Loading orders...</div>
 <script>
     function fetchorders() {
-        fetch('http://purchasefuture.zapto.org/orders/fetchAll')
+        fetch('http://purchasingfuture.zapto.org/orders/fetchAll')
             .then(response => {
                 if (!response.ok) throw new Error('Failed to fetch orders');
                 return response.json();

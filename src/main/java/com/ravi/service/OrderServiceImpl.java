@@ -28,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public Long placeOrder(OrderRequest orderRequest) {
+    public Order placeOrder(OrderRequest orderRequest) {
 
         log.info("before palcing order");
 
@@ -44,14 +44,15 @@ public class OrderServiceImpl implements OrderService {
                     order.setProductId(dto.getProductId());
                     order.setProductName(dto.getProductName());
                     order.setProductPrice(dto.getPrice());
-                    //Date
+
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     String formattedDate = formatter.format(new Date());
                     order.setOrderDate(formattedDate);
                     order.setOrderStatus("PENDING");
-                    return orderRepository.save(order).getOrderId();
+
+                    return orderRepository.save(order);
                 })
-                .orElse(0L);
+                .orElse(null);
     }
 
 

@@ -1,7 +1,9 @@
 package com.ravi.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ravi.entity.Order;
+import com.ravi.exception.ErrorResponse;
 import com.ravi.kafka.OrderEventProducer;
 import com.ravi.model.OrderRequest;
 import com.ravi.service.OrderService;
@@ -27,19 +29,19 @@ public class OrderController {
     OrderEventProducer orderEventProducer ;
 
     @PostMapping("/placeOrder")
-    public ResponseEntity<?> placeOrder(@RequestBody OrderRequest orderRequest) {
+    public ResponseEntity<?> placeOrder(@RequestBody OrderRequest orderRequest) throws JsonProcessingException {
 
 
-        Long orderId = orderService.placeOrder(orderRequest);
-        log.info("placeOrder called");
+        Order placedOrder = orderService.placeOrder(orderRequest);
+        log.info("placeOrder called - "+placedOrder);
 
-        if (orderId != 0) {
-            // Send Kafka event
-            orderEventProducer.sendOrderCreatedEvent(orderRequest);
-            return new ResponseEntity<>(orderId, HttpStatus.OK);
+        if (placedOrder != null) {
+            orderEventProducer.sendOrderCreatedEvent(placedOrder);
+            return new ResponseEntity<>(placedOrder, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Product not available", HttpStatus.BAD_REQUEST);
         }
+
     }
 
     @GetMapping("/fetchAll")

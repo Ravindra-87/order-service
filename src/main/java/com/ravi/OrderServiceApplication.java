@@ -18,6 +18,17 @@ public class OrderServiceApplication {
                 .build();
     }
 
+/*
+
+    @Bean
+    public WebClient webClient() {
+        return WebClient.builder()
+                .baseUrl("http://localhost:8081/") // required for uriBuilder to work
+                .build();
+    }
+*/
+
+
     public static void main(String[] args) {
         SpringApplication.run(OrderServiceApplication.class, args);
     }

@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface OrderService {
 
-    public Long placeOrder(OrderRequest orderRequest);
+    public Order placeOrder(OrderRequest orderRequest);
     public List<Order> getOrders();
 }

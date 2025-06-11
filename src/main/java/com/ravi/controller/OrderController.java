@@ -35,7 +35,7 @@ public class OrderController {
 
         if (orderId != 0) {
             // Send Kafka event
-            orderEventProducer.sendOrderCreatedEvent("Order created with below product \n" + orderRequest);
+            orderEventProducer.sendOrderCreatedEvent(orderRequest);
             return new ResponseEntity<>(orderId, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Product not available", HttpStatus.BAD_REQUEST);

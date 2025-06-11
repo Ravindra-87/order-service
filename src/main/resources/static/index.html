@@ -189,8 +189,7 @@
 <h2 class="animated-title">🛒 Orders Catalog</h2>
 <div id="result">Loading orders...</div>
 <script>
-    function fetchorders() {
-        fetch('http://purchasingfuture.zapto.org/orders/fetchAll')
+    function fetchorders() {fetch('http://purchasingfuture.zapto.org/orders/fetchAll')
             .then(response => {
                 if (!response.ok) throw new Error('Failed to fetch orders');
                 return response.json();

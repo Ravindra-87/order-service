@@ -35,12 +35,16 @@ public class OrderController {
         Order placedOrder = orderService.placeOrder(orderRequest);
         log.info("placeOrder called - "+placedOrder);
 
-        if (placedOrder != null) {
-            orderEventProducer.sendOrderCreatedEvent(placedOrder);
-            return new ResponseEntity<>(placedOrder, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Product not available", HttpStatus.BAD_REQUEST);
-        }
+        return Optional.ofNullable(placedOrder)
+                .map(order -> {
+                    try {
+                        orderEventProducer.sendOrderCreatedEvent(placedOrder);
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return new ResponseEntity<>(order, HttpStatus.OK);
+                })
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
 
     }
 

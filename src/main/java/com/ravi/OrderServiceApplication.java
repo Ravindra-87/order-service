@@ -10,14 +10,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 @SpringBootApplication (exclude = {DataSourceAutoConfiguration.class})
 public class OrderServiceApplication {
 
-/*
     @Bean
     public WebClient webClient() {
         return WebClient.builder()
                 .baseUrl("http://purchasingfuture.zapto.org/") // required for uriBuilder to work
                 .build();
-    }*/
+    }
 
+/*
 
 
     @Bean
@@ -26,6 +26,7 @@ public class OrderServiceApplication {
                 .baseUrl("http://localhost:8081/") // required for uriBuilder to work
                 .build();
     }
+*/
 
 
 
